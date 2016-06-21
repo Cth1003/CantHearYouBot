@@ -5,14 +5,15 @@ password="" #BOTS PASSWORD
 creator_name="" #YOUR NAME (WITHOUT THE /U/)
 bot_subreddit="" #BOTS SUBREDDIT
 
+#Inports.
 import praw, time, re
 
 #Variables
 
 user_agent="Cant Hear You by /u/"+creator_name #The name the bot will use to communicate with reddit.
 users = [] #People that have been yelled at. Format: [[Username,UTC_Time],[Username,UTC_Time],...]
-banned_users = ["TheWutBot", "TheWallGrows","AutoModerator"] #Other bots
-Triggers = ('what', 'wut', 'wat', 'wot')
+banned_users = ["TheWutBot", "TheWallGrows","AutoModerator"] #Other bots.
+Triggers = ('what', 'wut', 'wat', 'wot') #texts that triggers the bot.
 no_link_subs = ("ImGoingToHellForThis") #Subs that have asked me not to link to the subreddit
 
 footer = { #text at the end of the post. !normal is the default, !no_link is without links and the rest are for custom subs
@@ -30,7 +31,7 @@ def bot_action(c,r): #Action the bot preforms
     global users
     parent = r.get_info(thing_id=c.parent_id) #get parent comment
     
-    if str(parent.author) in banned_users or str(c.author) in banned_users: return #If users banned: return
+    if str(parent.author) in banned_users or str(c.author) in banned_users: return #If users banned: return 
     
     if isNotAValidComment(parent): return #If it is a response to a thread, stop.
     subreddit = str(c.subreddit)
@@ -43,7 +44,7 @@ def bot_action(c,r): #Action the bot preforms
 
     if check_condition(parent): #If both comments are triggers, ie. What What
         try:
-            c.reply("In da but")
+            c.reply("In da but") #replys "In da but"
         except:
             pass
         return
@@ -117,11 +118,8 @@ def isNotAValidComment(thing): #Is it not a valid comment
     return hasattr(thing,"domain") #If it has domain, It's a post, so ignore.
 
 #Bot code
-
 r = praw.Reddit(user_agent) #user_agent
-
 r.login(username=username,password=password,disable_warning=True)
-
 for c in praw.helpers.comment_stream(r, 'all'): #for all comments
     if check_condition(c): #If condition
         bot_action(c,r) #Action
