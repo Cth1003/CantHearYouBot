@@ -12,7 +12,7 @@ import praw, time, re
 user_agent="Cant Hear You by /u/"+creator_name #The name the bot will use to communicate with reddit.
 users = [] #People that have been yelled at. Format: [[Username,UTC_Time],[Username,UTC_Time],...]
 banned_users = ["TheWutBot", "TheWallGrows","AutoModerator"] #Other bots
-Triggers = ('what', 'wut', 'wat', 'wot')
+Triggers = ('what', 'wut', 'wat', 'wot','what did you said','wat did u said')
 no_link_subs = ("ImGoingToHellForThis") #Subs that have asked me not to link to the subreddit
 
 footer = { #text at the end of the post. !normal is the default, !no_link is without links and the rest are for custom subs
